@@ -1,4 +1,4 @@
-package packetwrapper;
+package me.mypvp.protocolwrapper;
 
 import com.comphenix.protocol.reflect.StructureModifier;
 
