@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'me.mypvp'
+version '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    maven {
+        url "https://repo.codemc.io/repository/nms/"
+    }
+    maven {
+        url "https://repo.dmulloy2.net/repository/public/"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:24.0.0'
+    compileOnly 'org.spigotmc:spigot:1.19-R0.1-SNAPSHOT'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
+}
