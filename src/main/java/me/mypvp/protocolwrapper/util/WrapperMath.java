@@ -10,4 +10,8 @@ public class WrapperMath {
     return (byte) (int) (value * 256F / 360F);
   }
 
+  public static int compressPosition(double position) {
+    return (int) Math.floor(position * 32D);
+  }
+
 }
