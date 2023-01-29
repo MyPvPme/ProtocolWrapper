@@ -1,13 +1,21 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'me.mypvp'
-version '1.0.0'
+
+if (project.hasProperty('projVersion') && project.projVersion.length() > 0) {
+    project.version = project.projVersion
+} else {
+    project.version = "1.0.0-SNAPSHOT"
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+    withJavadocJar()
 }
 
 repositories {
@@ -28,4 +36,22 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url "https://repo.mypvp.me/repository/maven/"
+            credentials {
+                username project.hasProperty('mypvpRepoUser') ? mypvpRepoUser : System.getenv("MYPVP_REPO_USER")
+                password project.hasProperty('mypvpRepoPass') ? mypvpRepoPass : System.getenv("MYPVP_REPO_PASS")
+            }
+        }
+    }
 }
