@@ -35,43 +35,48 @@ public class ClientboundAddExperienceOrbPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int id) {
+  public ClientboundAddExperienceOrbPacket entityId(int id) {
     idField.write(id);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return idField.read();
   }
 
-  public void setX(double value) {
+  public ClientboundAddExperienceOrbPacket x(double value) {
     xField.write(value);
+    return this;
   }
 
-  public double getX() {
+  public double x() {
     return xField.read();
   }
 
-  public void setY(double value) {
+  public ClientboundAddExperienceOrbPacket y(double value) {
     yField.write(value);
+    return this;
   }
 
-  public double getY() {
+  public double y() {
     return yField.read();
   }
 
-  public void setZ(double value) {
+  public ClientboundAddExperienceOrbPacket z(double value) {
     zField.write(value);
+    return this;
   }
 
-  public double getZ() {
+  public double z() {
     return zField.read();
   }
 
-  public void setValue(int value) {
+  public ClientboundAddExperienceOrbPacket value(int value) {
     valueField.write(value);
+    return this;
   }
 
-  public int getValue() {
+  public int value() {
     return valueField.read();
   }
 

@@ -30,11 +30,12 @@ public class ClientboundClearTitlesPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setResetTimes(boolean state) {
+  public ClientboundClearTitlesPacket resetTimes(boolean state) {
     resetTimesField.write(state);
+    return this;
   }
 
-  public boolean getResetTimes() {
+  public boolean resetTimes() {
     return resetTimesField.read();
   }
 }

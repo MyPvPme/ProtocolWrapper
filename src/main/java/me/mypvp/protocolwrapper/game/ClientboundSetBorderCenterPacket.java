@@ -31,19 +31,21 @@ public class ClientboundSetBorderCenterPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setX(double value) {
+  public ClientboundSetBorderCenterPacket x(double value) {
     newCenterXField.write(value);
+    return this;
   }
 
-  public double getX() {
+  public double x() {
     return newCenterXField.read();
   }
 
-  public void setZ(double value) {
+  public ClientboundSetBorderCenterPacket z(double value) {
     newCenterZField.write(value);
+    return this;
   }
 
-  public double getZ() {
+  public double z() {
     return newCenterZField.read();
   }
 

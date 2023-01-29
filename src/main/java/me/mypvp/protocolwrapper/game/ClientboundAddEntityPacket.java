@@ -56,106 +56,120 @@ public class ClientboundAddEntityPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundAddEntityPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setUUID(UUID uuid) {
+  public ClientboundAddEntityPacket uuid(UUID uuid) {
     uuidField.write(uuid);
+    return this;
   }
 
-  public UUID geUUID() {
+  public UUID uuid() {
     return uuidField.read();
   }
 
-  public void setX(double value) {
+  public ClientboundAddEntityPacket x(double value) {
     xField.write(value);
+    return this;
   }
 
-  public double getX() {
+  public double x() {
     return xField.read();
   }
 
-  public void setY(double value) {
+  public ClientboundAddEntityPacket y(double value) {
     yField.write(value);
+    return this;
   }
 
-  public double getY() {
+  public double y() {
     return yField.read();
   }
 
-  public void setZ(double value) {
+  public ClientboundAddEntityPacket z(double value) {
     zField.write(value);
+    return this;
   }
 
-  public double getZ() {
+  public double z() {
     return zField.read();
   }
 
-  public void setYaw(byte yaw) {
+  public ClientboundAddEntityPacket yaw(byte yaw) {
     yawField.write(yaw);
+    return this;
   }
 
-  public byte getYaw() {
+  public byte yaw() {
     return yawField.read();
   }
 
-  public void setHeadYaw(byte yaw) {
+  public ClientboundAddEntityPacket headYaw(byte yaw) {
     headYawField.write(yaw);
+    return this;
   }
 
-  public byte getHeadYaw() {
+  public byte headYaw() {
     return headYawField.read();
   }
 
-  public void setPitch(byte pitch) {
+  public ClientboundAddEntityPacket pitch(byte pitch) {
     pitchField.write(pitch);
+    return this;
   }
 
-  public byte getPitch() {
+  public byte pitch() {
     return pitchField.read();
   }
 
-  public void setVelocityX(int value) {
+  public ClientboundAddEntityPacket velocityX(int value) {
     velocityXField.write(value);
+    return this;
   }
 
-  public int getVelocityX() {
+  public int velocityX() {
     return velocityXField.read();
   }
 
-  public void setVelocityY(int value) {
+  public ClientboundAddEntityPacket velocityY(int value) {
     velocityYField.write(value);
+    return this;
   }
 
-  public int getVelocityY() {
+  public int velocityY() {
     return velocityYField.read();
   }
-  public void setVelocityZ(int value) {
+
+  public ClientboundAddEntityPacket velocityZ(int value) {
     velocityZField.write(value);
+    return this;
   }
 
-  public int getVelocityZ() {
+  public int velocityZ() {
     return velocityZField.read();
   }
 
-  public void setEntityType(EntityType entityType) {
+  public ClientboundAddEntityPacket entityType(EntityType entityType) {
     entityTypeField.write(entityType);
+    return this;
   }
 
-  public EntityType getEntityType() {
+  public EntityType entityType() {
     return entityTypeField.read();
   }
 
-  public void setEntityData(int data) {
+  public ClientboundAddEntityPacket entityData(int data) {
     entityDataField.write(data);
+    return this;
   }
 
-  public int getEntityData() {
+  public int entityData() {
     return entityDataField.read();
   }
 

@@ -37,59 +37,66 @@ public class ClientboundAddPlayerPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundAddPlayerPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setPlayerId(UUID uuid) {
+  public ClientboundAddPlayerPacket playerId(UUID uuid) {
     playerIdField.write(uuid);
+    return this;
   }
 
-  public UUID getPlayerId() {
+  public UUID playerId() {
     return playerIdField.read();
   }
 
-  public void setX(double value) {
+  public ClientboundAddPlayerPacket x(double value) {
     xField.write(value);
+    return this;
   }
 
-  public double getX() {
+  public double x() {
     return xField.read();
   }
 
-  public void setY(double value) {
+  public ClientboundAddPlayerPacket y(double value) {
     yField.write(value);
+    return this;
   }
 
-  public double getY() {
+  public double y() {
     return yField.read();
   }
 
-  public void setZ(double value) {
+  public ClientboundAddPlayerPacket z(double value) {
     zField.write(value);
+    return this;
   }
 
-  public double getZ() {
+  public double z() {
     return zField.read();
   }
 
-  public void setYaw(byte yaw) {
+  public ClientboundAddPlayerPacket yaw(byte yaw) {
     yawField.write(yaw);
+    return this;
   }
 
-  public byte getYaw() {
+  public byte yaw() {
     return yawField.read();
   }
 
-  public void setPitch(byte pitch) {
+  public ClientboundAddPlayerPacket pitch(byte pitch) {
     pitchField.write(pitch);
+    return this;
   }
 
-  public byte getPitch() {
+  public byte pitch() {
     return pitchField.read();
   }
 

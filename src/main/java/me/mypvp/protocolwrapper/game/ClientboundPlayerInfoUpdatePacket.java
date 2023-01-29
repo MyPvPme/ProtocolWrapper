@@ -35,19 +35,21 @@ public class ClientboundPlayerInfoUpdatePacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setAction(PlayerInfoAction action) {
+  public ClientboundPlayerInfoUpdatePacket action(PlayerInfoAction action) {
     actionField.write(action);
+    return this;
   }
 
-  public PlayerInfoAction getAction() {
+  public PlayerInfoAction action() {
     return actionField.read();
   }
 
-  public void setDataList(List<PlayerInfoData> list) {
+  public ClientboundPlayerInfoUpdatePacket dataList(List<PlayerInfoData> list) {
     dataField.write(list);
+    return this;
   }
 
-  public List<PlayerInfoData> readDataList() {
+  public List<PlayerInfoData> dataList() {
     return dataField.read();
   }
 

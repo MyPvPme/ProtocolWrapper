@@ -31,11 +31,12 @@ public class ClientboundRemoveEntitiesPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityIds(List<Integer> entityIds) {
+  public ClientboundRemoveEntitiesPacket entityIds(List<Integer> entityIds) {
     entityIdsField.write(entityIds);
+    return this;
   }
 
-  public List<Integer> getEntityIds() {
+  public List<Integer> entityIds() {
     return entityIdsField.read();
   }
 }

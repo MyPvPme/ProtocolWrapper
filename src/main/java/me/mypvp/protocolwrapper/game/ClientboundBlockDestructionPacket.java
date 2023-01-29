@@ -34,27 +34,30 @@ public class ClientboundBlockDestructionPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int id) {
+  public ClientboundBlockDestructionPacket entityId(int id) {
     eidField.write(id);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return eidField.read();
   }
 
-  public void setBlockPosition(BlockPosition blockPosition) {
+  public ClientboundBlockDestructionPacket blockPosition(BlockPosition blockPosition) {
     positionField.write(blockPosition);
+    return this;
   }
 
-  public BlockPosition getBlockPosition() {
+  public BlockPosition blockPosition() {
     return positionField.read();
   }
 
-  public void setStage(int stage) {
+  public ClientboundBlockDestructionPacket stage(int stage) {
     stageField.write(stage);
+    return this;
   }
 
-  public int getStage() {
+  public int stage() {
     return stageField.read();
   }
 }

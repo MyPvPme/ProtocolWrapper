@@ -33,21 +33,23 @@ public class ClientboundGameEventPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setValue(float value) {
+  public ClientboundGameEventPacket value(float value) {
     valueField.write(value);
+    return this;
   }
 
-  public float readValue() {
+  public float value() {
     return valueField.read();
   }
 
-  public void setGameAction(GameEventAction gameAction) {
+  public ClientboundGameEventPacket gameEvent(GameEventAction gameAction) {
     InternalStructure structure = eventField.read();
     structure.getIntegers().write(0, gameAction.getId());
     eventField.write(structure);
+    return this;
   }
 
-  public GameEventAction getGameAction() {
+  public GameEventAction gameEvent() {
     InternalStructure structure = eventField.read();
     int key = structure.getIntegers().read(0);
     for (GameEventAction value : GameEventAction.values()) {

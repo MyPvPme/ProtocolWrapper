@@ -38,88 +38,97 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundMoveEntityPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setDeltaX(short value) {
+  public ClientboundMoveEntityPacket deltaX(short value) {
     deltaXField.write(value);
+    return this;
   }
 
-  public short getDeltaX() {
+  public short deltaX() {
     return deltaXField.read();
   }
 
-  public void setDeltaY(short value) {
+  public ClientboundMoveEntityPacket deltaY(short value) {
     deltaYField.write(value);
+    return this;
   }
 
-  public short getDeltaY() {
+  public short deltaY() {
     return deltaYField.read();
   }
 
-  public void setDeltaZ(short value) {
+  public ClientboundMoveEntityPacket deltaZ(short value) {
     deltaZField.write(value);
+    return this;
   }
 
-  public short getDeltaZ() {
+  public short deltaZ() {
     return deltaZField.read();
   }
 
-  public void setYaw(byte yaw) {
+  public ClientboundMoveEntityPacket yaw(byte yaw) {
     yawField.write(yaw);
+    return this;
   }
 
-  public byte getYaw() {
+  public byte yaw() {
     return yawField.read();
   }
 
-  public void setPitch(byte pitch) {
+  public ClientboundMoveEntityPacket pitch(byte pitch) {
     pitchField.write(pitch);
+    return this;
   }
 
-  public byte getPitch() {
+  public byte pitch() {
     return pitchField.read();
   }
 
-  public void setOnGround(boolean value) {
+  public ClientboundMoveEntityPacket onGround(boolean value) {
     onGroundField.write(value);
+    return this;
   }
 
-  public boolean getOnGround() {
+  public boolean onGround() {
     return onGroundField.read();
   }
 
-  public void setRotateChanged(boolean value) {
+  public ClientboundMoveEntityPacket rotationChanged(boolean value) {
     rotateField.write(value);
+    return this;
   }
 
-  public boolean getRotateChanged() {
+  public boolean rotationChanged() {
     return rotateField.read();
   }
 
-  public void setPositionChanged(boolean value) {
+  public ClientboundMoveEntityPacket positionChanged(boolean value) {
     positionChangedField.write(value);
+    return this;
   }
 
-  public boolean getPositionChanged() {
+  public boolean positionChanged() {
     return positionChangedField.read();
   }
 
   public static class EntityMovePacket extends ClientboundMoveEntityPacket {
 
     public EntityMovePacket(int entityId, short deltaX, short deltaY, short deltaZ, boolean onGround) {
-      setEntityId(entityId);
-      setDeltaX(deltaX);
-      setDeltaY(deltaY);
-      setDeltaZ(deltaZ);
-      setOnGround(onGround);
-      setPositionChanged(true);
-      setRotateChanged(false);
+      entityId(entityId);
+      deltaX(deltaX);
+      deltaY(deltaY);
+      deltaZ(deltaZ);
+      onGround(onGround);
+      positionChanged(true);
+      rotationChanged(false);
     }
 
   }
@@ -127,12 +136,12 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
   public static class EntityLookPacket extends ClientboundMoveEntityPacket {
 
     public EntityLookPacket(int entityId, byte yaw, byte pitch, boolean onGround) {
-      setEntityId(entityId);
-      setYaw(yaw);
-      setPitch(pitch);
-      setOnGround(onGround);
-      setPositionChanged(false);
-      setRotateChanged(true);
+      entityId(entityId);
+      yaw(yaw);
+      pitch(pitch);
+      onGround(onGround);
+      positionChanged(false);
+      rotationChanged(true);
     }
 
   }
@@ -141,15 +150,15 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
 
     public EntityMoveLookPacket(int entityId, short deltaX, short deltaY, short deltaZ,
         byte yaw, byte pitch, boolean onGround) {
-      setEntityId(entityId);
-      setDeltaX(deltaX);
-      setDeltaY(deltaY);
-      setDeltaZ(deltaZ);
-      setYaw(yaw);
-      setPitch(pitch);
-      setOnGround(onGround);
-      setPositionChanged(true);
-      setRotateChanged(true);
+      entityId(entityId);
+      deltaX(deltaX);
+      deltaY(deltaY);
+      deltaZ(deltaZ);
+      yaw(yaw);
+      pitch(pitch);
+      onGround(onGround);
+      positionChanged(true);
+      rotationChanged(true);
     }
 
   }

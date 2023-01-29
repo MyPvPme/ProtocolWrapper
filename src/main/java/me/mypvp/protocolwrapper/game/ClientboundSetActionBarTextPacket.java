@@ -32,11 +32,12 @@ public class ClientboundSetActionBarTextPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setMessage(WrappedChatComponent component) {
+  public ClientboundSetActionBarTextPacket message(WrappedChatComponent component) {
     messageField.write(component);
+    return this;
   }
 
-  public WrappedChatComponent getMessage() {
+  public WrappedChatComponent message() {
     return messageField.read();
   }
 

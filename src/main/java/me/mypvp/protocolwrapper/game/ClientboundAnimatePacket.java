@@ -38,19 +38,21 @@ public class ClientboundAnimatePacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int id) {
+  public ClientboundAnimatePacket entityId(int id) {
     idField.write(id);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return idField.read();
   }
 
-  public void setAction(int action) {
+  public ClientboundAnimatePacket action(int action) {
     actionField.write(action);
+    return this;
   }
 
-  public int getAction() {
+  public int action() {
     return actionField.read();
   }
 }

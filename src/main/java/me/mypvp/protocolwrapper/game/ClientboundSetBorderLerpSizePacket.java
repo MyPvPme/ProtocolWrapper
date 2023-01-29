@@ -32,27 +32,30 @@ public class ClientboundSetBorderLerpSizePacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setOldSize(double size) {
+  public ClientboundSetBorderLerpSizePacket oldSize(double size) {
     oldSizeField.write(size);
+    return this;
   }
 
-  public double getOldSize() {
+  public double oldSize() {
     return oldSizeField.read();
   }
 
-  public void setNewSize(double size) {
+  public ClientboundSetBorderLerpSizePacket newSize(double size) {
     newSizeField.write(size);
+    return this;
   }
 
-  public double getNewSize() {
+  public double newSize() {
     return newSizeField.read();
   }
 
-  public void setLerpTime(long time) {
+  public ClientboundSetBorderLerpSizePacket lerpTime(long time) {
     lerpTimeField.write(time);
+    return this;
   }
 
-  public long getLerpTime() {
+  public long lerpTime() {
     return lerpTimeField.read();
   }
 

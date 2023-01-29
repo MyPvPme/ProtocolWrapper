@@ -35,19 +35,21 @@ public class ClientboundBlockUpdatePacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setBlockPosition(BlockPosition blockPosition) {
+  public ClientboundBlockUpdatePacket blockPosition(BlockPosition blockPosition) {
     blockPositionField.write(blockPosition);
+    return this;
   }
 
-  public BlockPosition getBlockPosition() {
+  public BlockPosition blockPosition() {
     return blockPositionField.read();
   }
 
-  public void setBlockData(WrappedBlockData blockData) {
+  public ClientboundBlockUpdatePacket blockData(WrappedBlockData blockData) {
     stateField.write(blockData);
+    return this;
   }
 
-  public WrappedBlockData getBlockData() {
+  public WrappedBlockData blockData() {
     return stateField.read();
   }
 

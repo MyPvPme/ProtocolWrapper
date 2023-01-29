@@ -36,59 +36,66 @@ public class ClientboundTeleportEntityPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundTeleportEntityPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setX(double value) {
+  public ClientboundTeleportEntityPacket x(double value) {
     xField.write(value);
+    return this;
   }
 
-  public double getX() {
+  public double x() {
     return xField.read();
   }
 
-  public void setY(double value) {
+  public ClientboundTeleportEntityPacket y(double value) {
     yField.write(value);
+    return this;
   }
 
-  public double getY() {
+  public double y() {
     return yField.read();
   }
 
-  public void setZ(double value) {
+  public ClientboundTeleportEntityPacket z(double value) {
     zField.write(value);
+    return this;
   }
 
-  public double getZ() {
+  public double z() {
     return zField.read();
   }
 
-  public void setYaw(byte yaw) {
+  public ClientboundTeleportEntityPacket yaw(byte yaw) {
     yawField.write(yaw);
+    return this;
   }
 
-  public byte getYaw() {
+  public byte yaw() {
     return yawField.read();
   }
 
-  public void setPitch(byte pitch) {
+  public ClientboundTeleportEntityPacket pitch(byte pitch) {
     pitchField.write(pitch);
+    return this;
   }
 
-  public byte getPitch() {
+  public byte pitch() {
     return pitchField.read();
   }
 
-  public void setOnGround(boolean state) {
+  public ClientboundTeleportEntityPacket onGround(boolean state) {
     onGroundField.write(state);
+    return this;
   }
 
-  public boolean isOnGround() {
+  public boolean onGround() {
     return onGroundField.read();
   }
 

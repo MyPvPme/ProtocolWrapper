@@ -32,11 +32,12 @@ public class ClientboundSetTitleTextPacket extends AbstractPacket {
     return TYPE;
   }
 
-  public void setTitle(WrappedChatComponent wrappedChatComponent) {
+  public ClientboundSetTitleTextPacket title(WrappedChatComponent wrappedChatComponent) {
     titleField.write(wrappedChatComponent);
+    return this;
   }
 
-  public WrappedChatComponent getTitle() {
+  public WrappedChatComponent title() {
     return titleField.read();
   }
 
