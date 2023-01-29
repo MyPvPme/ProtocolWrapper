@@ -203,4 +203,62 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
     }
   }
 
+  public static class CreateTeamPacket extends ClientboundSetPlayerTeamPacket {
+
+    public CreateTeamPacket(String teamName, WrappedChatComponent displayName, WrappedChatComponent prefix,
+        WrappedChatComponent suffix, NameTagVisibility nameTagVisibility,
+        CollisionRule collisionRule, ChatColor color, Flag[] flags, List<String> entries) {
+      setName(teamName);
+      setAction(Action.ACTION_ADD);
+      setPlayerNames(entries);
+      TeamInfoData data = new TeamInfoData(displayName, prefix, suffix, nameTagVisibility,
+          collisionRule, color, flags);
+      setTeamInfo(data);
+    }
+
+  }
+
+  public static class RemoveTeamPacket extends ClientboundSetPlayerTeamPacket {
+
+    public RemoveTeamPacket(String teamName) {
+      setName(teamName);
+      setAction(Action.ACTION_REMOVE);
+    }
+
+  }
+
+  public static class UpdateTeamPacket extends ClientboundSetPlayerTeamPacket {
+
+    public UpdateTeamPacket(String teamName, WrappedChatComponent displayName, WrappedChatComponent prefix,
+        WrappedChatComponent suffix, NameTagVisibility nameTagVisibility,
+        CollisionRule collisionRule, ChatColor color, Flag[] flags) {
+      setName(teamName);
+      setAction(Action.ACTION_UPDATE);
+      TeamInfoData data = new TeamInfoData(displayName, prefix, suffix, nameTagVisibility,
+          collisionRule, color, flags);
+      setTeamInfo(data);
+    }
+
+  }
+
+  public static class AddPlayerPacket extends ClientboundSetPlayerTeamPacket {
+
+    public AddPlayerPacket(String teamName, List<String> entries) {
+      setName(teamName);
+      setAction(Action.ACTION_ADD_PLAYERS);
+      setPlayerNames(entries);
+    }
+
+  }
+
+
+  public static class RemovePlayerPacket extends ClientboundSetPlayerTeamPacket {
+
+    public RemovePlayerPacket(String teamName, List<String> entries) {
+      setName(teamName);
+      setAction(Action.ACTION_REMOVE_PLAYERS);
+      setPlayerNames(entries);
+    }
+
+  }
 }
