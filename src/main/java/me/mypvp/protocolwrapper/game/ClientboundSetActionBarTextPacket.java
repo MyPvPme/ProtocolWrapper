@@ -13,7 +13,7 @@ public class ClientboundSetActionBarTextPacket extends AbstractPacket {
   public static final PacketType TYPE = Server.SET_ACTION_BAR_TEXT;
 
   private final PacketField<WrappedChatComponent> messageField =
-      new PacketField<>(getContainer().getChatComponents(), 0);
+      new PacketField<>(container().getChatComponents(), 0);
 
   public ClientboundSetActionBarTextPacket() {
   }
@@ -28,7 +28,7 @@ public class ClientboundSetActionBarTextPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

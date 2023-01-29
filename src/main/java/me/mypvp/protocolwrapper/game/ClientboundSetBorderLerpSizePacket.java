@@ -11,9 +11,9 @@ public class ClientboundSetBorderLerpSizePacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_BORDER_LERP_SIZE;
 
-  private final PacketField<Double> oldSizeField = new PacketField<>(getContainer().getDoubles(), 0);
-  private final PacketField<Double> newSizeField = new PacketField<>(getContainer().getDoubles(), 1);
-  private final PacketField<Long> lerpTimeField = new PacketField<>(getContainer().getLongs(), 0);
+  private final PacketField<Double> oldSizeField = new PacketField<>(container().getDoubles(), 0);
+  private final PacketField<Double> newSizeField = new PacketField<>(container().getDoubles(), 1);
+  private final PacketField<Long> lerpTimeField = new PacketField<>(container().getLongs(), 0);
 
   public ClientboundSetBorderLerpSizePacket() {
   }
@@ -28,7 +28,7 @@ public class ClientboundSetBorderLerpSizePacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

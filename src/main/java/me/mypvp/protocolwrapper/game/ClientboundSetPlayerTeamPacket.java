@@ -34,14 +34,15 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
   public static final int MAX_VISIBILITY_LENGTH = 40;
   public static final int MAX_COLLISION_LENGTH = 40;
 
-  private final PacketField<Integer> actionField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<String> nameField = new PacketField<>(getContainer().getStrings(), 0);
+  private final PacketField<Integer> actionField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<String> nameField = new PacketField<>(container().getStrings(), 0);
   private final PacketField<Collection> playerNamesField =
-      new PacketField<>(getContainer().getSpecificModifier(Collection.class), 0);
+      new PacketField<>(container().getSpecificModifier(Collection.class), 0);
   private final PacketField<Optional<InternalStructure>> parametersField
-      = new PacketField<>(getContainer().getOptionalStructures(), 0);
+      = new PacketField<>(container().getOptionalStructures(), 0);
 
-  public ClientboundSetPlayerTeamPacket() {}
+  public ClientboundSetPlayerTeamPacket() {
+  }
 
   public ClientboundSetPlayerTeamPacket(@NotNull Object handle) {
     super(handle);
@@ -53,69 +54,42 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setAction(Action action) {
-    int value;
-    switch (action) {
-      case ACTION_ADD:
-        value = 0;
-        break;
-      case ACTION_REMOVE:
-        value = 1;
-        break;
-      case ACTION_UPDATE:
-        value = 2;
-        break;
-      case ACTION_ADD_PLAYERS:
-        value = 3;
-        break;
-      case ACTION_REMOVE_PLAYERS:
-        value = 4;
-        break;
-      default:
-        return;
-    }
-    actionField.write(value);
+  public ClientboundSetPlayerTeamPacket action(Action action) {
+    actionField.write(action.ordinal());
+    return this;
   }
 
-  public Action getAction() {
-    int action = actionField.read();
-    switch (action) {
-      case 0:
-        return Action.ACTION_ADD;
-      case 1:
-        return Action.ACTION_REMOVE;
-      case 2:
-        return Action.ACTION_UPDATE;
-      case 3:
-        return Action.ACTION_ADD_PLAYERS;
-      case 4:
-        return Action.ACTION_REMOVE_PLAYERS;
-      default:
-        return null;
+  public Action action() {
+    Integer action = actionField.read();
+    if (action != null) {
+      return Action.values()[action];
     }
+    return null;
   }
 
-  public void setName(String name) {
+  public ClientboundSetPlayerTeamPacket name(String name) {
     nameField.write(name);
+    return this;
   }
 
-  public String getName() {
+  public String name() {
     return nameField.read();
   }
 
-  public void setPlayerNames(List<String> names) {
+  public ClientboundSetPlayerTeamPacket playerNames(List<String> names) {
     playerNamesField.write(names);
+    return this;
   }
 
-  public List<String> getPlayerNames() {
+  public List<String> playerNames() {
     return (List<String>) playerNamesField.read();
   }
 
-  public TeamInfoData getTeamInfo() {
+  public TeamInfoData teamInfo() {
     Optional<InternalStructure> paramStructOpt = parametersField.read();
     if(!paramStructOpt.isPresent()) {
       return new TeamInfoData();
@@ -156,17 +130,17 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
         collisionRule, color, flags.toArray(new Flag[0]));
   }
 
-  public void setTeamInfo(TeamInfoData teamInfo) {
+  public void teamInfo(TeamInfoData teamInfo) {
     Optional<InternalStructure> paramStructOpt = parametersField.read();
     if(paramStructOpt.isPresent()) {
 
-      WrappedChatComponent displayName = teamInfo.getDisplayName();
-      WrappedChatComponent playerPrefix = teamInfo.getPlayerPrefix();
-      WrappedChatComponent playerSuffix = teamInfo.getPlayerSuffix();
-      NameTagVisibility nameTagVisibility = teamInfo.getNameTagVisibility();
-      CollisionRule collisionRule = teamInfo.getCollisionRule();
-      ChatColor color = teamInfo.getColor();
-      Flag[] flags = teamInfo.getFlags();
+      WrappedChatComponent displayName = teamInfo.displayName();
+      WrappedChatComponent playerPrefix = teamInfo.playerPrefix();
+      WrappedChatComponent playerSuffix = teamInfo.playerSuffix();
+      NameTagVisibility nameTagVisibility = teamInfo.nameTagVisibility();
+      CollisionRule collisionRule = teamInfo.collisionRule();
+      ChatColor color = teamInfo.color();
+      Flag[] flags = teamInfo.flags();
 
       InternalStructure structure = paramStructOpt.get();
       if(displayName != null) {
@@ -209,12 +183,12 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
     public CreateTeamPacket(String teamName, WrappedChatComponent displayName, WrappedChatComponent prefix,
         WrappedChatComponent suffix, NameTagVisibility nameTagVisibility,
         CollisionRule collisionRule, ChatColor color, Flag[] flags, List<String> entries) {
-      setName(teamName);
-      setAction(Action.ACTION_ADD);
-      setPlayerNames(entries);
+      name(teamName);
+      action(Action.ACTION_ADD);
+      playerNames(entries);
       TeamInfoData data = new TeamInfoData(displayName, prefix, suffix, nameTagVisibility,
           collisionRule, color, flags);
-      setTeamInfo(data);
+      teamInfo(data);
     }
 
   }
@@ -222,8 +196,8 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
   public static class RemoveTeamPacket extends ClientboundSetPlayerTeamPacket {
 
     public RemoveTeamPacket(String teamName) {
-      setName(teamName);
-      setAction(Action.ACTION_REMOVE);
+      name(teamName);
+      action(Action.ACTION_REMOVE);
     }
 
   }
@@ -233,11 +207,11 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
     public UpdateTeamPacket(String teamName, WrappedChatComponent displayName, WrappedChatComponent prefix,
         WrappedChatComponent suffix, NameTagVisibility nameTagVisibility,
         CollisionRule collisionRule, ChatColor color, Flag[] flags) {
-      setName(teamName);
-      setAction(Action.ACTION_UPDATE);
+      name(teamName);
+      action(Action.ACTION_UPDATE);
       TeamInfoData data = new TeamInfoData(displayName, prefix, suffix, nameTagVisibility,
           collisionRule, color, flags);
-      setTeamInfo(data);
+      teamInfo(data);
     }
 
   }
@@ -245,20 +219,19 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
   public static class AddPlayerPacket extends ClientboundSetPlayerTeamPacket {
 
     public AddPlayerPacket(String teamName, List<String> entries) {
-      setName(teamName);
-      setAction(Action.ACTION_ADD_PLAYERS);
-      setPlayerNames(entries);
+      name(teamName);
+      action(Action.ACTION_ADD_PLAYERS);
+      playerNames(entries);
     }
 
   }
 
-
   public static class RemovePlayerPacket extends ClientboundSetPlayerTeamPacket {
 
     public RemovePlayerPacket(String teamName, List<String> entries) {
-      setName(teamName);
-      setAction(Action.ACTION_REMOVE_PLAYERS);
-      setPlayerNames(entries);
+      name(teamName);
+      action(Action.ACTION_REMOVE_PLAYERS);
+      playerNames(entries);
     }
 
   }

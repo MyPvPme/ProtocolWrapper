@@ -13,7 +13,7 @@ public class ClientboundSetSubtitleTextPacket extends AbstractPacket {
   public static final PacketType TYPE = Server.SET_SUBTITLE_TEXT;
 
   private final PacketField<WrappedChatComponent> subtitleField = new PacketField<>(
-      getContainer().getChatComponents(), 0);
+      container().getChatComponents(), 0);
 
   public ClientboundSetSubtitleTextPacket() {
   }
@@ -28,15 +28,16 @@ public class ClientboundSetSubtitleTextPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setSubtitle(WrappedChatComponent wrappedChatComponent) {
+  public ClientboundSetSubtitleTextPacket subtitle(WrappedChatComponent wrappedChatComponent) {
     subtitleField.write(wrappedChatComponent);
+    return this;
   }
 
-  public WrappedChatComponent getSubtitle() {
+  public WrappedChatComponent subtitle() {
     return subtitleField.read();
   }
 

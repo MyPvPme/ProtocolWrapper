@@ -12,13 +12,13 @@ public class ClientboundAddPlayerPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.NAMED_ENTITY_SPAWN;
 
-  private final PacketField<Integer> entityIdField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<UUID> playerIdField = new PacketField<>(getContainer().getUUIDs(), 0);
-  private final PacketField<Double> xField = new PacketField<>(getContainer().getDoubles(), 0);
-  private final PacketField<Double> yField = new PacketField<>(getContainer().getDoubles(), 1);
-  private final PacketField<Double> zField = new PacketField<>(getContainer().getDoubles(), 2);
-  private final PacketField<Byte> yawField = new PacketField<>(getContainer().getBytes(), 0);
-  private final PacketField<Byte> pitchField = new PacketField<>(getContainer().getBytes(), 1);
+  private final PacketField<Integer> entityIdField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<UUID> playerIdField = new PacketField<>(container().getUUIDs(), 0);
+  private final PacketField<Double> xField = new PacketField<>(container().getDoubles(), 0);
+  private final PacketField<Double> yField = new PacketField<>(container().getDoubles(), 1);
+  private final PacketField<Double> zField = new PacketField<>(container().getDoubles(), 2);
+  private final PacketField<Byte> yawField = new PacketField<>(container().getBytes(), 0);
+  private final PacketField<Byte> pitchField = new PacketField<>(container().getBytes(), 1);
 
   public ClientboundAddPlayerPacket() {
   }
@@ -33,7 +33,7 @@ public class ClientboundAddPlayerPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

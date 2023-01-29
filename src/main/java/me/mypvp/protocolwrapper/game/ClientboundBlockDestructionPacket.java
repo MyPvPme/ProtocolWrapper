@@ -12,10 +12,10 @@ public class ClientboundBlockDestructionPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.BLOCK_BREAK_ANIMATION;
 
-  private final PacketField<Integer> eidField = new PacketField<>(getContainer().getIntegers(), 0);
+  private final PacketField<Integer> eidField = new PacketField<>(container().getIntegers(), 0);
   private final PacketField<BlockPosition> positionField
-      = new PacketField<>(getContainer().getBlockPositionModifier(), 0);
-  private final PacketField<Integer> stageField = new PacketField<>(getContainer().getIntegers(), 1);
+      = new PacketField<>(container().getBlockPositionModifier(), 0);
+  private final PacketField<Integer> stageField = new PacketField<>(container().getIntegers(), 1);
 
   public ClientboundBlockDestructionPacket() {
   }
@@ -30,7 +30,7 @@ public class ClientboundBlockDestructionPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

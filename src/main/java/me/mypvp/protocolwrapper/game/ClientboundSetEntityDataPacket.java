@@ -14,9 +14,9 @@ public class ClientboundSetEntityDataPacket extends AbstractPacket {
   public static final PacketType TYPE = Server.ENTITY_METADATA;
 
   private final PacketField<Integer> entityIdField =
-      new PacketField<>(getContainer().getIntegers(), 0);
+      new PacketField<>(container().getIntegers(), 0);
   private final PacketField<List<WrappedWatchableObject>> trackedValuesField
-      = new PacketField<>(getContainer().getWatchableCollectionModifier(), 0);
+      = new PacketField<>(container().getWatchableCollectionModifier(), 0);
 
   public ClientboundSetEntityDataPacket() {
   }
@@ -31,23 +31,25 @@ public class ClientboundSetEntityDataPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundSetEntityDataPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setTrackedValues(List<WrappedWatchableObject> trackedValues) {
+  public ClientboundSetEntityDataPacket trackedValues(List<WrappedWatchableObject> trackedValues) {
     trackedValuesField.write(trackedValues);
+    return this;
   }
 
-  public List<WrappedWatchableObject> getTrackedValues() {
+  public List<WrappedWatchableObject> trackedValues() {
     return trackedValuesField.read();
   }
 

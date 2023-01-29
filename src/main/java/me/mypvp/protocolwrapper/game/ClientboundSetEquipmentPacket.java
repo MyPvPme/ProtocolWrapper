@@ -15,9 +15,9 @@ public class ClientboundSetEquipmentPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.ENTITY_EQUIPMENT;
 
-  private final PacketField<Integer> entityIdField = new PacketField<>(getContainer().getIntegers(), 0);
+  private final PacketField<Integer> entityIdField = new PacketField<>(container().getIntegers(), 0);
   private final PacketField<List<Pair<ItemSlot, ItemStack>>> equipmentListField =
-      new PacketField<>(getContainer().getSlotStackPairLists(), 0);
+      new PacketField<>(container().getSlotStackPairLists(), 0);
 
   public ClientboundSetEquipmentPacket() {
   }
@@ -32,23 +32,25 @@ public class ClientboundSetEquipmentPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundSetEquipmentPacket entityId(int entityId) {
     entityIdField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return entityIdField.read();
   }
 
-  public void setEquipmentList(List<Pair<ItemSlot, ItemStack>> equipmentList) {
+  public ClientboundSetEquipmentPacket equipmentList(List<Pair<ItemSlot, ItemStack>> equipmentList) {
     equipmentListField.write(equipmentList);
+    return this;
   }
 
-  public List<Pair<ItemSlot, ItemStack>> getEquipmentList() {
+  public List<Pair<ItemSlot, ItemStack>> equipmentList() {
     return equipmentListField.read();
   }
 }

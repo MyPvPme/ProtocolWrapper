@@ -11,7 +11,7 @@ public class ClientboundClearTitlesPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.CLEAR_TITLES;
 
-  private final PacketField<Boolean> resetTimesField = new PacketField<>(getContainer().getBooleans(), 0);
+  private final PacketField<Boolean> resetTimesField = new PacketField<>(container().getBooleans(), 0);
 
   public ClientboundClearTitlesPacket() {
   }
@@ -26,7 +26,7 @@ public class ClientboundClearTitlesPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

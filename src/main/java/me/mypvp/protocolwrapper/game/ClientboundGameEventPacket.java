@@ -6,15 +6,33 @@ import com.comphenix.protocol.events.InternalStructure;
 import com.comphenix.protocol.events.PacketContainer;
 import me.mypvp.protocolwrapper.AbstractPacket;
 import me.mypvp.protocolwrapper.PacketField;
-import me.mypvp.protocolwrapper.types.GameEventAction;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientboundGameEventPacket extends AbstractPacket {
 
+  public enum GameEventAction {
+    NO_RESPAWN_BLOCK,
+    START_RAINING,
+    STOP_RAINING,
+    CHANGE_GAME_MODE,
+    WIN_GAME,
+    DEMO_EVENT,
+    ARROW_HIT_PLAYER,
+    RAIN_LEVEL_CHANGE,
+    THUNDER_LEVEL_CHANGE,
+    PUFFER_FISH_STING,
+    GUARDIAN_ELDER_EFFECT,
+    IMMEDIATE_RESPAWN;
+
+    public int id() {
+      return ordinal();
+    }
+  }
+
   public static final PacketType TYPE = Server.GAME_STATE_CHANGE;
 
-  private final PacketField<InternalStructure> eventField = new PacketField<>(getContainer().getStructures(), 0);
-  private final PacketField<Float> valueField = new PacketField<>(getContainer().getFloat(), 0);
+  private final PacketField<InternalStructure> eventField = new PacketField<>(container().getStructures(), 0);
+  private final PacketField<Float> valueField = new PacketField<>(container().getFloat(), 0);
 
   public ClientboundGameEventPacket() {
   }
@@ -29,7 +47,7 @@ public class ClientboundGameEventPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
@@ -44,7 +62,7 @@ public class ClientboundGameEventPacket extends AbstractPacket {
 
   public ClientboundGameEventPacket gameEvent(GameEventAction gameAction) {
     InternalStructure structure = eventField.read();
-    structure.getIntegers().write(0, gameAction.getId());
+    structure.getIntegers().write(0, gameAction.id());
     eventField.write(structure);
     return this;
   }
@@ -53,7 +71,7 @@ public class ClientboundGameEventPacket extends AbstractPacket {
     InternalStructure structure = eventField.read();
     int key = structure.getIntegers().read(0);
     for (GameEventAction value : GameEventAction.values()) {
-      if(value.getId() == key) {
+      if(value.id() == key) {
         return value;
       }
     }

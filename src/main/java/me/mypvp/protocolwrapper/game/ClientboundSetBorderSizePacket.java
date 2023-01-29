@@ -11,7 +11,7 @@ public class ClientboundSetBorderSizePacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_BORDER_SIZE;
 
-  private final PacketField<Double> sizeField = new PacketField<>(getContainer().getDoubles(), 0);
+  private final PacketField<Double> sizeField = new PacketField<>(container().getDoubles(), 0);
 
   public ClientboundSetBorderSizePacket() {
   }
@@ -20,21 +20,21 @@ public class ClientboundSetBorderSizePacket extends AbstractPacket {
     super(handle);
   }
 
-  public ClientboundSetBorderSizePacket(
-      @NotNull PacketContainer packetContainer) {
+  public ClientboundSetBorderSizePacket(@NotNull PacketContainer packetContainer) {
     super(packetContainer);
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setSize(double size) {
+  public ClientboundSetBorderSizePacket size(double size) {
     sizeField.write(size);
+    return this;
   }
 
-  public double getSize() {
+  public double size() {
     return sizeField.read();
   }
 

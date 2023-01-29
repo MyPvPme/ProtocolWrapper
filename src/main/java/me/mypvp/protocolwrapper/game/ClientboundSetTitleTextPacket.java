@@ -13,7 +13,7 @@ public class ClientboundSetTitleTextPacket extends AbstractPacket {
   public static final PacketType TYPE = Server.SET_TITLE_TEXT;
 
   private final PacketField<WrappedChatComponent> titleField = new PacketField<>(
-      getContainer().getChatComponents(), 0);
+      container().getChatComponents(), 0);
 
   public ClientboundSetTitleTextPacket() {
   }
@@ -28,7 +28,7 @@ public class ClientboundSetTitleTextPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

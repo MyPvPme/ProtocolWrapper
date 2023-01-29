@@ -1,7 +1,9 @@
 package me.mypvp.protocolwrapper;
 
 import com.comphenix.protocol.reflect.StructureModifier;
+import org.jetbrains.annotations.ApiStatus;
 
+@ApiStatus.Internal
 public class PacketField<T> {
 
   private final StructureModifier<T> modifier;

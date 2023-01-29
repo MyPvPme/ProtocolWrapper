@@ -11,8 +11,8 @@ public class ClientboundSetEntityLinkPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.ATTACH_ENTITY;
 
-  private final PacketField<Integer> attachedField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Integer> holdingIdField = new PacketField<>(getContainer().getIntegers(), 1);
+  private final PacketField<Integer> attachedField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Integer> holdingIdField = new PacketField<>(container().getIntegers(), 1);
 
   public ClientboundSetEntityLinkPacket() {
   }
@@ -27,23 +27,25 @@ public class ClientboundSetEntityLinkPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setAttachedEntity(int entityId) {
+  public ClientboundSetEntityLinkPacket attachedEntity(int entityId) {
     attachedField.write(entityId);
+    return this;
   }
 
-  public int getAttachedEntity() {
+  public int attachedEntity() {
     return attachedField.read();
   }
 
-  public void setHoldingEntity(int entityId) {
+  public ClientboundSetEntityLinkPacket holdingEntity(int entityId) {
     holdingIdField.write(entityId);
+    return this;
   }
 
-  public int getHoldingEntity() {
+  public int holdingEntity() {
     return holdingIdField.read();
   }
 

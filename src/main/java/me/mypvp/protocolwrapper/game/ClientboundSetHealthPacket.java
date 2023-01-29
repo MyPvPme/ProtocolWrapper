@@ -11,9 +11,9 @@ public class ClientboundSetHealthPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.UPDATE_HEALTH;
 
-  private final PacketField<Float> healthField = new PacketField<>(getContainer().getFloat(), 0);
-  private final PacketField<Integer> foodField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Float> saturationField = new PacketField<>(getContainer().getFloat(), 1);
+  private final PacketField<Float> healthField = new PacketField<>(container().getFloat(), 0);
+  private final PacketField<Integer> foodField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Float> saturationField = new PacketField<>(container().getFloat(), 1);
 
   public ClientboundSetHealthPacket() {
   }
@@ -28,31 +28,34 @@ public class ClientboundSetHealthPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setHealth(float value) {
+  public ClientboundSetHealthPacket health(float value) {
     healthField.write(value);
+    return this;
   }
 
-  public float getHealth() {
+  public float health() {
     return healthField.read();
   }
 
-  public void setSaturation(float value) {
+  public ClientboundSetHealthPacket saturation(float value) {
     saturationField.write(value);
+    return this;
   }
 
-  public float getSaturation() {
+  public float saturation() {
     return saturationField.read();
   }
 
-  public void setFoodLevel(int value) {
+  public ClientboundSetHealthPacket foodLevel(int value) {
     foodField.write(value);
+    return this;
   }
 
-  public int getFoodLevel() {
+  public int foodLevel() {
     return foodField.read();
   }
 

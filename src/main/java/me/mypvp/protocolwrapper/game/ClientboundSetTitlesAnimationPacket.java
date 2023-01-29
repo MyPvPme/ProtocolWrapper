@@ -11,9 +11,9 @@ public class ClientboundSetTitlesAnimationPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_TITLES_ANIMATION;
 
-  private final PacketField<Integer> fadeInField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Integer> stayField = new PacketField<>(getContainer().getIntegers(), 1);
-  private final PacketField<Integer> fadeOutField = new PacketField<>(getContainer().getIntegers(), 2);
+  private final PacketField<Integer> fadeInField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Integer> stayField = new PacketField<>(container().getIntegers(), 1);
+  private final PacketField<Integer> fadeOutField = new PacketField<>(container().getIntegers(), 2);
 
   public ClientboundSetTitlesAnimationPacket() {
   }
@@ -28,31 +28,34 @@ public class ClientboundSetTitlesAnimationPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setFadeIn(int value) {
+  public ClientboundSetTitlesAnimationPacket fadeIn(int value) {
     fadeInField.write(value);
+    return this;
   }
 
-  public int getFadeIn() {
+  public int fadeIn() {
     return fadeInField.read();
   }
 
-  public void setStay(int value) {
+  public ClientboundSetTitlesAnimationPacket stay(int value) {
     stayField.write(value);
+    return this;
   }
 
-  public int getStay() {
+  public int stay() {
     return stayField.read();
   }
 
-  public void setFadeOut(int value) {
+  public ClientboundSetTitlesAnimationPacket fadeOut(int value) {
     fadeOutField.write(value);
+    return this;
   }
 
-  public int getFadeOut() {
+  public int fadeOut() {
     return fadeOutField.read();
   }
 

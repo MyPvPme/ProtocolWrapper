@@ -11,15 +11,15 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.ENTITY;
 
-  private final PacketField<Integer> entityIdField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Short> deltaXField = new PacketField<>(getContainer().getShorts(), 0);
-  private final PacketField<Short> deltaYField = new PacketField<>(getContainer().getShorts(), 1);
-  private final PacketField<Short> deltaZField = new PacketField<>(getContainer().getShorts(), 2);
-  private final PacketField<Byte> yawField = new PacketField<>(getContainer().getBytes(), 0);
-  private final PacketField<Byte> pitchField = new PacketField<>(getContainer().getBytes(), 1);
-  private final PacketField<Boolean> onGroundField = new PacketField<>(getContainer().getBooleans(), 0);
-  private final PacketField<Boolean> rotateField = new PacketField<>(getContainer().getBooleans(), 1);
-  private final PacketField<Boolean> positionChangedField = new PacketField<>(getContainer().getBooleans(), 2);
+  private final PacketField<Integer> entityIdField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Short> deltaXField = new PacketField<>(container().getShorts(), 0);
+  private final PacketField<Short> deltaYField = new PacketField<>(container().getShorts(), 1);
+  private final PacketField<Short> deltaZField = new PacketField<>(container().getShorts(), 2);
+  private final PacketField<Byte> yawField = new PacketField<>(container().getBytes(), 0);
+  private final PacketField<Byte> pitchField = new PacketField<>(container().getBytes(), 1);
+  private final PacketField<Boolean> onGroundField = new PacketField<>(container().getBooleans(), 0);
+  private final PacketField<Boolean> rotateField = new PacketField<>(container().getBooleans(), 1);
+  private final PacketField<Boolean> positionChangedField = new PacketField<>(container().getBooleans(), 2);
 
   public ClientboundMoveEntityPacket() {
   }
@@ -34,7 +34,7 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

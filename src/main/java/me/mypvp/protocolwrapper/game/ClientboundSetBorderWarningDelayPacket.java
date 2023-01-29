@@ -11,7 +11,7 @@ public class ClientboundSetBorderWarningDelayPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_BORDER_WARNING_DELAY;
 
-  private final PacketField<Integer> warningTimeField = new PacketField<>(getContainer().getIntegers(), 0);
+  private final PacketField<Integer> warningTimeField = new PacketField<>(container().getIntegers(), 0);
 
   public ClientboundSetBorderWarningDelayPacket() {
   }
@@ -20,21 +20,21 @@ public class ClientboundSetBorderWarningDelayPacket extends AbstractPacket {
     super(handle);
   }
 
-  public ClientboundSetBorderWarningDelayPacket(
-      @NotNull PacketContainer packetContainer) {
+  public ClientboundSetBorderWarningDelayPacket(@NotNull PacketContainer packetContainer) {
     super(packetContainer);
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setWarningTime(int time) {
+  public ClientboundSetBorderWarningDelayPacket warningTime(int time) {
     warningTimeField.write(time);
+    return this;
   }
 
-  public int getWarningTime() {
+  public int warningTime() {
     return warningTimeField.read();
   }
 

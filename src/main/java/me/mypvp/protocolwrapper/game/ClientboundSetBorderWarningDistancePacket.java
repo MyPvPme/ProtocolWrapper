@@ -11,7 +11,7 @@ public class ClientboundSetBorderWarningDistancePacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_BORDER_WARNING_DISTANCE;
 
-  private final PacketField<Integer> warningBlocksField = new PacketField<>(getContainer().getIntegers(), 0);
+  private final PacketField<Integer> warningBlocksField = new PacketField<>(container().getIntegers(), 0);
 
   public ClientboundSetBorderWarningDistancePacket() {
   }
@@ -26,15 +26,16 @@ public class ClientboundSetBorderWarningDistancePacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setWarningBlocks(int blocks) {
+  public ClientboundSetBorderWarningDistancePacket warningBlocks(int blocks) {
     warningBlocksField.write(blocks);
+    return this;
   }
 
-  public int getWarningBlocks() {
+  public int warningBlocks() {
     return warningBlocksField.read();
   }
 

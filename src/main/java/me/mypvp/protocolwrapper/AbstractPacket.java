@@ -11,32 +11,36 @@ public abstract class AbstractPacket {
   private final PacketContainer container;
 
   public AbstractPacket() {
-    this.container = new PacketContainer(getType());
+    this.container = new PacketContainer(type());
   }
 
   public AbstractPacket(@NotNull Object handle) {
-    this.container = new PacketContainer(getType(), handle);
+    this.container = new PacketContainer(type(), handle);
   }
 
   public AbstractPacket(@NotNull PacketContainer packetContainer) {
-    if(packetContainer.getType() != getType()) {
+    if(packetContainer.getType() != type()) {
       throw new IllegalStateException("Invalid packet container type: " + packetContainer.getType().name());
     }
     this.container = packetContainer;
   }
 
-  public abstract PacketType getType();
+  public abstract PacketType type();
 
-  public PacketContainer getContainer() {
+  public PacketContainer container() {
     return container;
   }
 
-  public Object getHandle() {
+  public Object handle() {
     return container.getHandle();
   }
 
   public void sendPacket(Player player) {
-    ProtocolLibrary.getProtocolManager().sendServerPacket(player, getContainer());
+    ProtocolLibrary.getProtocolManager().sendServerPacket(player, container());
+  }
+
+  public void broadcast() {
+    ProtocolLibrary.getProtocolManager().broadcastServerPacket(container());
   }
 
 }

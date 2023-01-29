@@ -11,11 +11,11 @@ public class ClientboundAddExperienceOrbPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SPAWN_ENTITY_EXPERIENCE_ORB;
 
-  private final PacketField<Integer> idField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Double> xField = new PacketField<>(getContainer().getDoubles(), 0);
-  private final PacketField<Double> yField = new PacketField<>(getContainer().getDoubles(), 1);
-  private final PacketField<Double> zField = new PacketField<>(getContainer().getDoubles(), 2);
-  private final PacketField<Integer> valueField = new PacketField<>(getContainer().getIntegers(), 1);
+  private final PacketField<Integer> idField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Double> xField = new PacketField<>(container().getDoubles(), 0);
+  private final PacketField<Double> yField = new PacketField<>(container().getDoubles(), 1);
+  private final PacketField<Double> zField = new PacketField<>(container().getDoubles(), 2);
+  private final PacketField<Integer> valueField = new PacketField<>(container().getIntegers(), 1);
 
   public ClientboundAddExperienceOrbPacket() {
 
@@ -31,7 +31,7 @@ public class ClientboundAddExperienceOrbPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

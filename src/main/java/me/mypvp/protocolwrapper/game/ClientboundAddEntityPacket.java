@@ -14,31 +14,31 @@ public class ClientboundAddEntityPacket extends AbstractPacket {
   public static final PacketType TYPE = Server.SPAWN_ENTITY;
 
   private final PacketField<Integer> entityIdField =
-      new PacketField<>(getContainer().getIntegers(), 0);
+      new PacketField<>(container().getIntegers(), 0);
   private final PacketField<UUID> uuidField =
-      new PacketField<>(getContainer().getUUIDs(), 0);
+      new PacketField<>(container().getUUIDs(), 0);
   private final PacketField<EntityType> entityTypeField =
-      new PacketField<>(getContainer().getEntityTypeModifier(), 0);
+      new PacketField<>(container().getEntityTypeModifier(), 0);
   private final PacketField<Double> xField =
-      new PacketField<>(getContainer().getDoubles(), 0);
+      new PacketField<>(container().getDoubles(), 0);
   private final PacketField<Double> yField =
-      new PacketField<>(getContainer().getDoubles(), 1);
+      new PacketField<>(container().getDoubles(), 1);
   private final PacketField<Double> zField =
-      new PacketField<>(getContainer().getDoubles(), 2);
+      new PacketField<>(container().getDoubles(), 2);
   private final PacketField<Integer> velocityXField =
-      new PacketField<>(getContainer().getIntegers(), 1);
+      new PacketField<>(container().getIntegers(), 1);
   private final PacketField<Integer> velocityYField =
-      new PacketField<>(getContainer().getIntegers(), 2);
+      new PacketField<>(container().getIntegers(), 2);
   private final PacketField<Integer> velocityZField =
-      new PacketField<>(getContainer().getIntegers(), 3);
+      new PacketField<>(container().getIntegers(), 3);
   private final PacketField<Byte> pitchField =
-      new PacketField<>(getContainer().getBytes(), 0);
+      new PacketField<>(container().getBytes(), 0);
   private final PacketField<Byte> yawField =
-      new PacketField<>(getContainer().getBytes(), 1);
+      new PacketField<>(container().getBytes(), 1);
   private final PacketField<Byte> headYawField =
-      new PacketField<>(getContainer().getBytes(), 2);
+      new PacketField<>(container().getBytes(), 2);
   private final PacketField<Integer> entityDataField =
-      new PacketField<>(getContainer().getIntegers(), 4);
+      new PacketField<>(container().getIntegers(), 4);
 
   public ClientboundAddEntityPacket() {
   }
@@ -52,7 +52,7 @@ public class ClientboundAddEntityPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

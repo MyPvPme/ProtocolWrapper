@@ -12,7 +12,7 @@ public class ClientboundRemoveEntitiesPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.ENTITY_DESTROY;
 
-  private final PacketField<List<Integer>> entityIdsField = new PacketField<>(getContainer().getIntLists(), 0);
+  private final PacketField<List<Integer>> entityIdsField = new PacketField<>(container().getIntLists(), 0);
 
   public ClientboundRemoveEntitiesPacket() {
   }
@@ -27,7 +27,7 @@ public class ClientboundRemoveEntitiesPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

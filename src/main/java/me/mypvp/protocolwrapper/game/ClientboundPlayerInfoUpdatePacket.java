@@ -15,9 +15,9 @@ public class ClientboundPlayerInfoUpdatePacket extends AbstractPacket {
   public static final PacketType TYPE = Server.PLAYER_INFO;
 
   private final PacketField<PlayerInfoAction> actionField
-      = new PacketField<>(getContainer().getPlayerInfoAction(), 0);
+      = new PacketField<>(container().getPlayerInfoAction(), 0);
   private final PacketField<List<PlayerInfoData>> dataField
-      = new PacketField<>(getContainer().getPlayerInfoDataLists(), 0);
+      = new PacketField<>(container().getPlayerInfoDataLists(), 0);
 
   public ClientboundPlayerInfoUpdatePacket() {}
 
@@ -31,7 +31,7 @@ public class ClientboundPlayerInfoUpdatePacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

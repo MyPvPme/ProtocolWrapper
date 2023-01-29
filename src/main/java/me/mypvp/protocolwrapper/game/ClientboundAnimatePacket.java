@@ -18,8 +18,8 @@ public class ClientboundAnimatePacket extends AbstractPacket {
   public static final int CRITICAL_HIT = 4;
   public static final int MAGIC_CRITICAL_HIT = 5;
 
-  private final PacketField<Integer> idField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Integer> actionField = new PacketField<>(getContainer().getIntegers(), 1);
+  private final PacketField<Integer> idField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Integer> actionField = new PacketField<>(container().getIntegers(), 1);
 
   public ClientboundAnimatePacket() {
   }
@@ -34,7 +34,7 @@ public class ClientboundAnimatePacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

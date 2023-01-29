@@ -11,8 +11,8 @@ public class ClientboundSetPassengersPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.MOUNT;
 
-  private final PacketField<Integer> idField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<int[]> passengersField = new PacketField<>(getContainer().getIntegerArrays(), 0);
+  private final PacketField<Integer> idField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<int[]> passengersField = new PacketField<>(container().getIntegerArrays(), 0);
 
   public ClientboundSetPassengersPacket() {
   }
@@ -27,23 +27,25 @@ public class ClientboundSetPassengersPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundSetPassengersPacket entityId(int entityId) {
     idField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return idField.read();
   }
 
-  public void setPassengers(int[] value) {
+  public ClientboundSetPassengersPacket passengers(int[] value) {
     passengersField.write(value);
+    return this;
   }
 
-  public int[] getPassengers() {
+  public int[] passengers() {
     return passengersField.read();
   }
 

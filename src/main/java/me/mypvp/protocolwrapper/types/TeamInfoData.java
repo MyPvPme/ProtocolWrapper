@@ -67,60 +67,77 @@ public class TeamInfoData {
     this.flags = flags;
   }
 
-  public WrappedChatComponent getDisplayName() {
+  public TeamInfoData(TeamInfoData data) {
+    this.displayName = data.displayName;
+    this.playerPrefix = data.playerPrefix;
+    this.playerSuffix = data.playerSuffix;
+    this.nameTagVisibility = data.nameTagVisibility;
+    this.collisionRule = data.collisionRule;
+    this.color = data.color;
+    this.flags = data.flags;
+  }
+
+  public WrappedChatComponent displayName() {
     return displayName;
   }
 
-  public void setDisplayName(WrappedChatComponent displayName) {
+  public TeamInfoData displayName(WrappedChatComponent displayName) {
     this.displayName = displayName;
+    return this;
   }
 
-  public WrappedChatComponent getPlayerPrefix() {
+  public WrappedChatComponent playerPrefix() {
     return playerPrefix;
   }
 
-  public void setPlayerPrefix(WrappedChatComponent playerPrefix) {
+  public TeamInfoData playerPrefix(WrappedChatComponent playerPrefix) {
     this.playerPrefix = playerPrefix;
+    return this;
   }
 
-  public WrappedChatComponent getPlayerSuffix() {
+  public WrappedChatComponent playerSuffix() {
     return playerSuffix;
   }
 
-  public void setPlayerSuffix(WrappedChatComponent playerSuffix) {
+  public TeamInfoData playerSuffix(WrappedChatComponent playerSuffix) {
     this.playerSuffix = playerSuffix;
+    return this;
   }
 
-  public NameTagVisibility getNameTagVisibility() {
+  public NameTagVisibility nameTagVisibility() {
     return nameTagVisibility;
   }
 
-  public void setNameTagVisibility(NameTagVisibility nameTagVisibility) {
+  public TeamInfoData nameTagVisibility(NameTagVisibility nameTagVisibility) {
     this.nameTagVisibility = nameTagVisibility;
+    return this;
   }
 
-  public CollisionRule getCollisionRule() {
+  public CollisionRule collisionRule() {
     return collisionRule;
   }
 
-  public void setCollisionRule(CollisionRule collisionRule) {
+  public TeamInfoData collisionRule(CollisionRule collisionRule) {
     this.collisionRule = collisionRule;
+    return this;
   }
 
-  public ChatColor getColor() {
+  public ChatColor color() {
     return color;
   }
 
-  public void setColor(ChatColor color) {
+  public TeamInfoData color(ChatColor color) {
     this.color = color;
+    return this;
   }
 
-  public Flag[] getFlags() {
+  public Flag[] flags() {
     return flags;
   }
 
-  public void setFlags(Flag[] flags) {
+  public TeamInfoData flags(Flag[] flags) {
     this.flags = flags;
+    return this;
   }
 
 }

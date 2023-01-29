@@ -11,8 +11,8 @@ public class ClientboundSetBorderCenterPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.SET_BORDER_CENTER;
 
-  private final PacketField<Double> newCenterXField = new PacketField<>(getContainer().getDoubles(), 0);
-  private final PacketField<Double> newCenterZField = new PacketField<>(getContainer().getDoubles(), 1);
+  private final PacketField<Double> newCenterXField = new PacketField<>(container().getDoubles(), 0);
+  private final PacketField<Double> newCenterZField = new PacketField<>(container().getDoubles(), 1);
 
   public ClientboundSetBorderCenterPacket() {
   }
@@ -27,7 +27,7 @@ public class ClientboundSetBorderCenterPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

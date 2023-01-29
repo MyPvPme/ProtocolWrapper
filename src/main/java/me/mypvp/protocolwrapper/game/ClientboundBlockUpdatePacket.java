@@ -14,9 +14,9 @@ public class ClientboundBlockUpdatePacket extends AbstractPacket {
   public static final PacketType TYPE = Server.BLOCK_CHANGE;
 
   private final PacketField<BlockPosition> blockPositionField
-      = new PacketField<>(getContainer().getBlockPositionModifier(), 0);
+      = new PacketField<>(container().getBlockPositionModifier(), 0);
   private final PacketField<WrappedBlockData> stateField
-      = new PacketField<>(getContainer().getBlockData(), 0);
+      = new PacketField<>(container().getBlockData(), 0);
 
   public ClientboundBlockUpdatePacket() {
   }
@@ -31,7 +31,7 @@ public class ClientboundBlockUpdatePacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 

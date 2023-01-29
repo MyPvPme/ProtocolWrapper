@@ -11,10 +11,10 @@ public class ClientboundSetEntityMotionPacket extends AbstractPacket {
 
   public static final PacketType TYPE = Server.ENTITY_VELOCITY;
 
-  private final PacketField<Integer> idField = new PacketField<>(getContainer().getIntegers(), 0);
-  private final PacketField<Integer> velocityXField = new PacketField<>(getContainer().getIntegers(), 1);
-  private final PacketField<Integer> velocityYField = new PacketField<>(getContainer().getIntegers(), 2);
-  private final PacketField<Integer> velocityZField = new PacketField<>(getContainer().getIntegers(), 3);
+  private final PacketField<Integer> idField = new PacketField<>(container().getIntegers(), 0);
+  private final PacketField<Integer> velocityXField = new PacketField<>(container().getIntegers(), 1);
+  private final PacketField<Integer> velocityYField = new PacketField<>(container().getIntegers(), 2);
+  private final PacketField<Integer> velocityZField = new PacketField<>(container().getIntegers(), 3);
 
   public ClientboundSetEntityMotionPacket() {
   }
@@ -29,38 +29,42 @@ public class ClientboundSetEntityMotionPacket extends AbstractPacket {
   }
 
   @Override
-  public PacketType getType() {
+  public PacketType type() {
     return TYPE;
   }
 
-  public void setEntityId(int entityId) {
+  public ClientboundSetEntityMotionPacket entityId(int entityId) {
     idField.write(entityId);
+    return this;
   }
 
-  public int getEntityId() {
+  public int entityId() {
     return idField.read();
   }
 
-  public void setVelocityX(int value) {
+  public ClientboundSetEntityMotionPacket velocityX(int value) {
     velocityXField.write(value);
+    return this;
   }
 
-  public int getVelocityX() {
+  public int velocityX() {
     return velocityXField.read();
   }
 
-  public void setVelocityY(int value) {
+  public ClientboundSetEntityMotionPacket velocityY(int value) {
     velocityYField.write(value);
+    return this;
   }
 
-  public int getVelocityY() {
+  public int velocityY() {
     return velocityYField.read();
   }
-  public void setVelocityZ(int value) {
+  public ClientboundSetEntityMotionPacket velocityZ(int value) {
     velocityZField.write(value);
+    return this;
   }
 
-  public int getVelocityZ() {
+  public int velocityZ() {
     return velocityZField.read();
   }
 
