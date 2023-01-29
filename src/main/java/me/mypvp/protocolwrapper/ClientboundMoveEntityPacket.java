@@ -108,4 +108,48 @@ public class ClientboundMoveEntityPacket extends AbstractPacket {
     return positionChangedField.read();
   }
 
+  public static class EntityMovePacket extends ClientboundMoveEntityPacket {
+
+    public EntityMovePacket(int entityId, short deltaX, short deltaY, short deltaZ, boolean onGround) {
+      setEntityId(entityId);
+      setDeltaX(deltaX);
+      setDeltaY(deltaY);
+      setDeltaZ(deltaZ);
+      setOnGround(onGround);
+      setPositionChanged(true);
+      setRotateChanged(false);
+    }
+
+  }
+
+  public static class EntityLookPacket extends ClientboundMoveEntityPacket {
+
+    public EntityLookPacket(int entityId, byte yaw, byte pitch, boolean onGround) {
+      setEntityId(entityId);
+      setYaw(yaw);
+      setPitch(pitch);
+      setOnGround(onGround);
+      setPositionChanged(false);
+      setRotateChanged(true);
+    }
+
+  }
+
+  public static class EntityMoveLookPacket extends ClientboundMoveEntityPacket {
+
+    public EntityMoveLookPacket(int entityId, short deltaX, short deltaY, short deltaZ,
+        byte yaw, byte pitch, boolean onGround) {
+      setEntityId(entityId);
+      setDeltaX(deltaX);
+      setDeltaY(deltaY);
+      setDeltaZ(deltaZ);
+      setYaw(yaw);
+      setPitch(pitch);
+      setOnGround(onGround);
+      setPositionChanged(true);
+      setRotateChanged(true);
+    }
+
+  }
+
 }
