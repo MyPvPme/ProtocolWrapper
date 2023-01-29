@@ -5,10 +5,16 @@ import com.comphenix.protocol.PacketType.Play.Server;
 import com.comphenix.protocol.events.InternalStructure;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.utility.MinecraftReflection;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import me.mypvp.protocolwrapper.types.TeamInfoData;
+import me.mypvp.protocolwrapper.types.TeamInfoData.CollisionRule;
+import me.mypvp.protocolwrapper.types.TeamInfoData.Flag;
+import me.mypvp.protocolwrapper.types.TeamInfoData.NameTagVisibility;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,47 +28,6 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
     ACTION_UPDATE,
     ACTION_ADD_PLAYERS,
     ACTION_REMOVE_PLAYERS
-  }
-
-  public enum NameTagVisibility {
-    ALWAYS("always"),
-    HIDE_FOR_OTHER_TEAMS("hideForOtherTeams"),
-    HIDE_FOR_OWN_TEAMS("hideForOwnTeam"),
-    NEVER("never");
-
-    private final String key;
-
-    NameTagVisibility(String key) {
-      this.key = key;
-    }
-  }
-
-  public enum CollisionRule {
-    ALWAYS("always"),
-    PUSH_OTHER_TEAMS("pushOtherTeams"),
-    PUSH_OWN_TEAM("pushOwnTeam"),
-    NEVER("never");
-
-    private final String key;
-
-    CollisionRule(String key) {
-      this.key = key;
-    }
-  }
-
-  public enum Flag {
-    ALLOW_FRIENDLY_FIRE,
-    CAN_SEE_FRIENDLY_INVISIBLE
-  }
-
-  public static class Parameters {
-    public WrappedChatComponent displayName;
-    public WrappedChatComponent playerPrefix;
-    public WrappedChatComponent playerSuffix;
-    public NameTagVisibility nameTagVisibility;
-    public CollisionRule collisionRule;
-    public ChatColor color;
-    public Flag[] flags;
   }
 
   public static final int MAX_VISIBILITY_LENGTH = 40;
@@ -149,17 +114,58 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
     return (List<String>) playerNamesField.read();
   }
 
-  public void setParameters(Parameters parameters) {
+  public TeamInfoData getTeamInfo() {
+    Optional<InternalStructure> paramStructOpt = parametersField.read();
+    if(!paramStructOpt.isPresent()) {
+      return new TeamInfoData();
+    }
+    InternalStructure structure = paramStructOpt.get();
+    WrappedChatComponent displayName = structure.getChatComponents().read(0);
+    WrappedChatComponent playerPrefix = structure.getChatComponents().read(1);
+    WrappedChatComponent playerSuffix = structure.getChatComponents().read(2);
+    String nameTagVisibilityString = structure.getStrings().read(0);
+    String collisionRuleString = structure.getStrings().read(1);
+    ChatColor color = structure.getEnumModifier(ChatColor.class,
+        MinecraftReflection.getMinecraftClass("EnumChatFormat")).read(0);
+    int value = structure.getIntegers().read(0);
+
+    List<Flag> flags = new ArrayList<>();
+    if((value & 2) == 2) {
+      flags.add(Flag.CAN_SEE_FRIENDLY_INVISIBLE);
+    }
+    if((value & 1) == 1) {
+      flags.add(Flag.ALLOW_FRIENDLY_FIRE);
+    }
+
+    NameTagVisibility nameTagVisibility = null;
+    for (NameTagVisibility entry : NameTagVisibility.values()) {
+      if(entry.getKey().equalsIgnoreCase(nameTagVisibilityString)) {
+        nameTagVisibility = entry;
+        break;
+      }
+    }
+    CollisionRule collisionRule = null;
+    for (CollisionRule entry : CollisionRule.values()) {
+      if(entry.getKey().equalsIgnoreCase(collisionRuleString)) {
+        collisionRule = entry;
+        break;
+      }
+    }
+    return new TeamInfoData(displayName, playerPrefix, playerSuffix, nameTagVisibility,
+        collisionRule, color, flags.toArray(new Flag[0]));
+  }
+
+  public void setTeamInfo(TeamInfoData teamInfo) {
     Optional<InternalStructure> paramStructOpt = parametersField.read();
     if(paramStructOpt.isPresent()) {
 
-      WrappedChatComponent displayName = parameters.displayName;
-      WrappedChatComponent playerPrefix = parameters.playerPrefix;
-      WrappedChatComponent playerSuffix = parameters.playerSuffix;
-      NameTagVisibility nameTagVisibility = parameters.nameTagVisibility;
-      CollisionRule collisionRule = parameters.collisionRule;
-      ChatColor color = parameters.color;
-      Flag[] flags = parameters.flags;
+      WrappedChatComponent displayName = teamInfo.getDisplayName();
+      WrappedChatComponent playerPrefix = teamInfo.getPlayerPrefix();
+      WrappedChatComponent playerSuffix = teamInfo.getPlayerSuffix();
+      NameTagVisibility nameTagVisibility = teamInfo.getNameTagVisibility();
+      CollisionRule collisionRule = teamInfo.getCollisionRule();
+      ChatColor color = teamInfo.getColor();
+      Flag[] flags = teamInfo.getFlags();
 
       InternalStructure structure = paramStructOpt.get();
       if(displayName != null) {
@@ -172,10 +178,10 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
         structure.getChatComponents().write(2, playerSuffix);
       }
       if(nameTagVisibility != null) {
-        structure.getStrings().write(0, nameTagVisibility.key);
+        structure.getStrings().write(0, nameTagVisibility.getKey());
       }
       if(collisionRule != null) {
-        structure.getStrings().write(0, collisionRule.key);
+        structure.getStrings().write(0, collisionRule.getKey());
       }
       if(color != null) {
         structure.getEnumModifier(ChatColor.class, MinecraftReflection.getMinecraftClass("EnumChatFormat"))
