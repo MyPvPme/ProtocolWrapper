@@ -1,16 +1,17 @@
-package me.mypvp.protocolwrapper;
+package me.mypvp.protocolwrapper.game;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Server;
 import com.comphenix.protocol.events.InternalStructure;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.utility.MinecraftReflection;
-import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import me.mypvp.protocolwrapper.AbstractPacket;
+import me.mypvp.protocolwrapper.PacketField;
 import me.mypvp.protocolwrapper.types.TeamInfoData;
 import me.mypvp.protocolwrapper.types.TeamInfoData.CollisionRule;
 import me.mypvp.protocolwrapper.types.TeamInfoData.Flag;

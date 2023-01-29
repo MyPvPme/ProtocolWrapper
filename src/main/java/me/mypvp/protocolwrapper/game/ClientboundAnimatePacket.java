@@ -1,8 +1,10 @@
-package me.mypvp.protocolwrapper;
+package me.mypvp.protocolwrapper.game;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Server;
 import com.comphenix.protocol.events.PacketContainer;
+import me.mypvp.protocolwrapper.AbstractPacket;
+import me.mypvp.protocolwrapper.PacketField;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientboundAnimatePacket extends AbstractPacket {

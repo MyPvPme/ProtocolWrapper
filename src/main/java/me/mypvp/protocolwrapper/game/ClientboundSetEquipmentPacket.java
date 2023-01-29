@@ -1,4 +1,4 @@
-package me.mypvp.protocolwrapper;
+package me.mypvp.protocolwrapper.game;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Server;
@@ -6,6 +6,8 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers.ItemSlot;
 import com.comphenix.protocol.wrappers.Pair;
 import java.util.List;
+import me.mypvp.protocolwrapper.AbstractPacket;
+import me.mypvp.protocolwrapper.PacketField;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
