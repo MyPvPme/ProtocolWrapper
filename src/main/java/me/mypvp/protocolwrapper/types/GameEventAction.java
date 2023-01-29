@@ -12,8 +12,7 @@ public enum GameEventAction {
   THUNDER_LEVEL_CHANGE(8),
   PUFFER_FISH_STING(9),
   GUARDIAN_ELDER_EFFECT(10),
-  IMMEDIATE_RESPAWN(11),
-  DEMO_OPEN_SCREEN(12);
+  IMMEDIATE_RESPAWN(11);
 
   private final int id;
 
