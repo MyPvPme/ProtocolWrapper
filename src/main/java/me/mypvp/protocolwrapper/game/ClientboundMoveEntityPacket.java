@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ClientboundMoveEntityPacket extends AbstractPacket {
 
-  public static final PacketType TYPE = Server.ENTITY;
+  public static final PacketType TYPE = Server.REL_ENTITY_MOVE_LOOK;
 
   private final PacketField<Integer> entityIdField = new PacketField<>(container().getIntegers(), 0);
   private final PacketField<Short> deltaXField = new PacketField<>(container().getShorts(), 0);
