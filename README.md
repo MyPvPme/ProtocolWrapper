@@ -33,6 +33,6 @@ implementation 'me.mypvp:ProtocolWrapper:0.0.1'
 <dependency>
   <groupId>me.mypvp</groupId>
   <artifactId>ProtocolWrapper</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.3</version>
 </dependency>
 ```
