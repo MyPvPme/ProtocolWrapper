@@ -17,7 +17,7 @@ repositories {
 }
 ```
 ```GROOVY
-implementation 'me.mypvp:ProtocolWrapper:0.0.1'
+implementation 'me.mypvp:ProtocolWrapper:0.0.3'
 ```
 
 #### Maven
