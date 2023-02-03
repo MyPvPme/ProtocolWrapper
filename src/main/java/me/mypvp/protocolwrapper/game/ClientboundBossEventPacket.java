@@ -10,9 +10,9 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 import me.mypvp.protocolwrapper.AbstractPacket;
 import me.mypvp.protocolwrapper.PacketField;
-import me.mypvp.protocolwrapper.types.BossBarBattle;
-import me.mypvp.protocolwrapper.types.BossBarBattle.BarColor;
-import me.mypvp.protocolwrapper.types.BossBarBattle.BarStyle;
+import me.mypvp.protocolwrapper.types.BossBattle;
+import me.mypvp.protocolwrapper.types.BossBattle.BarColor;
+import me.mypvp.protocolwrapper.types.BossBattle.BarStyle;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientboundBossEventPacket extends AbstractPacket {
@@ -65,12 +65,12 @@ public class ClientboundBossEventPacket extends AbstractPacket {
 
   public static class AddBossBarPacket extends ClientboundBossEventPacket {
 
-    public AddBossBarPacket(BossBarBattle bossBarBattle) {
-      uuid(bossBarBattle.getUUID());
+    public AddBossBarPacket(BossBattle bossBattle) {
+      uuid(bossBattle.getUUID());
       try {
         Constructor<?> actionConstructor = classAddBossBar.getDeclaredConstructors()[0];
         actionConstructor.setAccessible(true);
-        Object actionHandle = actionConstructor.newInstance(BossBarBattle.getConverter().getGeneric(bossBarBattle));
+        Object actionHandle = actionConstructor.newInstance(BossBattle.getConverter().getGeneric(bossBattle));
         action(actionHandle);
       } catch (ReflectiveOperationException exception) {
         throw new IllegalStateException("Failed to create bossbar packet", exception);

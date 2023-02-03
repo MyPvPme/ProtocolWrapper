@@ -7,26 +7,26 @@ import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
-public class BossBarBattle {
+public class BossBattle {
 
   private static final Class<?> bossBattleServerClass
       = MinecraftReflection.getMinecraftClass("server.level.BossBattleServer");
 
-  private static final EquivalentConverter<BossBarBattle> converter = new EquivalentConverter<BossBarBattle>() {
+  private static final EquivalentConverter<BossBattle> converter = new EquivalentConverter<BossBattle>() {
 
     @Override
-    public Object getGeneric(BossBarBattle bossBarBattle) {
+    public Object getGeneric(BossBattle bossBattle) {
       try {
         Object handle = bossBattleServerClass.getConstructors()[0].newInstance(null, null, null);
         InternalStructure structure = InternalStructure.getConverter().getSpecific(handle);
-        structure.getUUIDs().write(0, bossBarBattle.uuid);
-        structure.getChatComponents().write(0, bossBarBattle.chatComponent);
-        structure.getFloat().write(0, bossBarBattle.progress);
-        structure.getEnumModifier(BarColor.class, 6).write(0, bossBarBattle.barColor);
-        structure.getEnumModifier(BarStyle.class, 7).write(0, bossBarBattle.barStyle);
-        structure.getBooleans().write(1, bossBarBattle.darkenScreen);
-        structure.getBooleans().write(2, bossBarBattle.playMusic);
-        structure.getBooleans().write(3, bossBarBattle.createWorldFog);
+        structure.getUUIDs().write(0, bossBattle.uuid);
+        structure.getChatComponents().write(0, bossBattle.chatComponent);
+        structure.getFloat().write(0, bossBattle.progress);
+        structure.getEnumModifier(BarColor.class, 6).write(0, bossBattle.barColor);
+        structure.getEnumModifier(BarStyle.class, 7).write(0, bossBattle.barStyle);
+        structure.getBooleans().write(1, bossBattle.darkenScreen);
+        structure.getBooleans().write(2, bossBattle.playMusic);
+        structure.getBooleans().write(3, bossBattle.createWorldFog);
         return structure.getHandle();
       } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
         throw new RuntimeException(e);
@@ -34,7 +34,7 @@ public class BossBarBattle {
     }
 
     @Override
-    public BossBarBattle getSpecific(Object handle) {
+    public BossBattle getSpecific(Object handle) {
       InternalStructure structure = InternalStructure.getConverter().getSpecific(handle);
       UUID uuid = structure.getUUIDs().read(0);
       WrappedChatComponent chatComponent = structure.getChatComponents().read(0);
@@ -44,13 +44,13 @@ public class BossBarBattle {
       boolean darkenScreen = structure.getBooleans().read(1);
       boolean playMusic = structure.getBooleans().read(2);
       boolean createWorldFog = structure.getBooleans().read(3);
-      return new BossBarBattle(uuid, chatComponent, progress, barColor, barStyle, darkenScreen, playMusic,
+      return new BossBattle(uuid, chatComponent, progress, barColor, barStyle, darkenScreen, playMusic,
           createWorldFog);
     }
 
     @Override
-    public Class<BossBarBattle> getSpecificType() {
-      return BossBarBattle.class;
+    public Class<BossBattle> getSpecificType() {
+      return BossBattle.class;
     }
   };
 
@@ -63,12 +63,12 @@ public class BossBarBattle {
   private final boolean playMusic;
   private final boolean createWorldFog;
 
-  public BossBarBattle(UUID uuid, WrappedChatComponent chatComponent, float progress, BarColor barColor,
+  public BossBattle(UUID uuid, WrappedChatComponent chatComponent, float progress, BarColor barColor,
       BarStyle barStyle) {
     this(uuid, chatComponent, progress, barColor, barStyle, false, false, false);
   }
 
-  public BossBarBattle(UUID uuid, WrappedChatComponent chatComponent, float progress, BarColor barColor,
+  public BossBattle(UUID uuid, WrappedChatComponent chatComponent, float progress, BarColor barColor,
       BarStyle barStyle, boolean darkenScreen, boolean playMusic, boolean createWorldFog) {
     this.uuid = uuid;
     this.chatComponent = chatComponent;
@@ -130,7 +130,7 @@ public class BossBarBattle {
     NOTCHED_20
   }
 
-  public static EquivalentConverter<BossBarBattle> getConverter() {
+  public static EquivalentConverter<BossBattle> getConverter() {
     return converter;
   }
 
