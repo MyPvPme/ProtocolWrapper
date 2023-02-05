@@ -35,6 +35,8 @@ repositories {
 dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     implementation 'io.netty:netty-all:4.1.78.Final'
+    implementation 'com.mojang:brigadier:1.0.18'
+    implementation 'fastutil:fastutil:5.0.9'
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
 }
