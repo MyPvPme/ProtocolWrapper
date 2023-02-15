@@ -20,9 +20,6 @@ public abstract class AbstractPacket {
   }
 
   public AbstractPacket(@NotNull PacketContainer packetContainer) {
-    if(packetContainer.getType() != type()) {
-      throw new IllegalStateException("Invalid packet container type: " + packetContainer.getType().name());
-    }
     this.container = packetContainer;
   }
 
