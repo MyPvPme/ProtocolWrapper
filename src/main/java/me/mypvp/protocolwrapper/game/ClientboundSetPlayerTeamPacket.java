@@ -156,7 +156,7 @@ public class ClientboundSetPlayerTeamPacket extends AbstractPacket {
         structure.getStrings().write(0, nameTagVisibility.getKey());
       }
       if(collisionRule != null) {
-        structure.getStrings().write(0, collisionRule.getKey());
+        structure.getStrings().write(1, collisionRule.getKey());
       }
       if(color != null) {
         structure.getEnumModifier(ChatColor.class, MinecraftReflection.getMinecraftClass("EnumChatFormat"))
