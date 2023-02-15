@@ -3,7 +3,9 @@ package me.mypvp.protocolwrapper.game;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Server;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedDataValue;
 import com.comphenix.protocol.wrappers.WrappedWatchableObject;
+import java.util.Collection;
 import java.util.List;
 import me.mypvp.protocolwrapper.AbstractPacket;
 import me.mypvp.protocolwrapper.PacketField;
@@ -15,8 +17,6 @@ public class ClientboundSetEntityDataPacket extends AbstractPacket {
 
   private final PacketField<Integer> entityIdField =
       new PacketField<>(container().getIntegers(), 0);
-  private final PacketField<List<WrappedWatchableObject>> trackedValuesField
-      = new PacketField<>(container().getWatchableCollectionModifier(), 0);
 
   public ClientboundSetEntityDataPacket() {
   }
@@ -45,12 +45,21 @@ public class ClientboundSetEntityDataPacket extends AbstractPacket {
   }
 
   public ClientboundSetEntityDataPacket trackedValues(List<WrappedWatchableObject> trackedValues) {
-    trackedValuesField.write(trackedValues);
+    container().getWatchableCollectionModifier().write(0, trackedValues);
     return this;
   }
 
   public List<WrappedWatchableObject> trackedValues() {
-    return trackedValuesField.read();
+    return container().getWatchableCollectionModifier().read(0);
+  }
+
+  public ClientboundSetEntityDataPacket trackedValuesAsDataValueList(List<WrappedDataValue> trackedValues) {
+    container().getDataValueCollectionModifier().write(0, trackedValues);
+    return this;
+  }
+
+  public List<WrappedDataValue> trackedValuesAsDataValueList() {
+    return container().getDataValueCollectionModifier().read(0);
   }
 
 }
