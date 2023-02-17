@@ -3,21 +3,31 @@ package me.mypvp.protocolwrapper.game;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.PacketType.Play.Server;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.PlayerInfoAction;
-import com.comphenix.protocol.wrappers.PlayerInfoData;
+import com.comphenix.protocol.wrappers.BukkitConverters;
+import java.util.Collection;
 import java.util.List;
 import me.mypvp.protocolwrapper.AbstractPacket;
 import me.mypvp.protocolwrapper.PacketField;
+import me.mypvp.protocolwrapper.types.PlayerInfoData;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientboundPlayerInfoUpdatePacket extends AbstractPacket {
 
+  public enum Action {
+    ADD_PLAYER,
+    UPDATE_GAME_MODE,
+    UPDATE_LATENCY,
+    UPDATE_DISPLAY_NAME,
+    REMOVE_PLAYER
+  }
+
   public static final PacketType TYPE = Server.PLAYER_INFO;
 
-  private final PacketField<PlayerInfoAction> actionField
-      = new PacketField<>(container().getPlayerInfoAction(), 0);
+  private final PacketField<Action> actionField
+      = new PacketField<>(container().getEnumModifier(Action.class, 0), 0);
   private final PacketField<List<PlayerInfoData>> dataField
-      = new PacketField<>(container().getPlayerInfoDataLists(), 0);
+      = new PacketField<>(container().getModifier()
+      .withType(Collection.class, BukkitConverters.getListConverter(PlayerInfoData.getConverter())), 0);
 
   public ClientboundPlayerInfoUpdatePacket() {}
 
@@ -35,12 +45,12 @@ public class ClientboundPlayerInfoUpdatePacket extends AbstractPacket {
     return TYPE;
   }
 
-  public ClientboundPlayerInfoUpdatePacket action(PlayerInfoAction action) {
+  public ClientboundPlayerInfoUpdatePacket action(Action action) {
     actionField.write(action);
     return this;
   }
 
-  public PlayerInfoAction action() {
+  public Action action() {
     return actionField.read();
   }
 
