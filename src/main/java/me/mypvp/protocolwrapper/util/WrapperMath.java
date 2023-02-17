@@ -3,7 +3,7 @@ package me.mypvp.protocolwrapper.util;
 public class WrapperMath {
 
   public static short getDeltaPosition(double from, double to) {
-    return (short) ((to * 32 - from * 32) * 128);
+    return (short) ((to - from) * 4096);
   }
 
   public static byte getAngle(float value) {
