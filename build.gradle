@@ -8,7 +8,7 @@ group 'me.mypvp'
 if (project.hasProperty('projVersion') && project.projVersion.length() > 0) {
     project.version = project.projVersion
 } else {
-    project.version = "1.0.0-SNAPSHOT"
+    project.version = "0.0.7"
 }
 
 java {
@@ -28,15 +28,14 @@ repositories {
     maven {
         url "https://repo.dmulloy2.net/repository/public/"
     }
-
     mavenCentral()
 }
 
 dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
-    implementation 'io.netty:netty-all:4.1.78.Final'
-    implementation 'com.mojang:brigadier:1.0.18'
-    implementation 'fastutil:fastutil:5.0.9'
+    compileOnly 'io.netty:netty-all:4.1.78.Final'
+    compileOnly 'com.mojang:brigadier:1.0.18'
+    compileOnly 'fastutil:fastutil:5.0.9'
     compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0-SNAPSHOT'
 }
