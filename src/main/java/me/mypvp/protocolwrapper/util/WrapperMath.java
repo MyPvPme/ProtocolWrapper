@@ -2,11 +2,11 @@ package me.mypvp.protocolwrapper.util;
 
 public class WrapperMath {
 
-  public static short getDeltaPosition(double from, double to) {
+  public static short compressMovePosition(double from, double to) {
     return (short) ((to - from) * 4096);
   }
 
-  public static byte getAngle(float value) {
+  public static byte compressAngle(float value) {
     return (byte) (int) (value * 256F / 360F);
   }
 
